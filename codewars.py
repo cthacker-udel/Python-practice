@@ -8,6 +8,7 @@ import random
 import ipaddress
 import socket
 import unittest
+import math
 
 from regex import F
 
@@ -1180,11 +1181,12 @@ def cakes(recipe, available):
         count += 1
     return 0
 
+def is_triangle(a, b, c):
+    return (a > 0 and b > 0 and c > 0) and (round(((a*a) + (b*b))**.5) == c or round(((a*a) + (c*c))**.5) == b or round(((b*b) + (c*c))**.5) == a or ((a + b) > c and (b + c) > a and (c + a) > b))
+
 
 def main():
-    recipe = {"apples": 3, "flour": 300, "sugar": 150, "milk": 100, "oil": 100}
-    available = {"sugar": 500, "flour": 2000, "milk": 2000}
-    print(cakes(recipe, available))
+    print(is_triangle(2, 2, 2))
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,6 @@
+{
+  "makefile.extensionOutputFolder": "./.vscode",
+  "python.formatting.provider": "black",
+  "editor.renderWhitespace": "all",
+  "editor.detectIndentation": true
+}

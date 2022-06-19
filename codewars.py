@@ -1236,13 +1236,37 @@ def find_ball(scales):
             return 3
         elif w == -1 and len(left_index) == 1 and right_index[0] == 3:
             return 2
+
+
+def even_numbers(arr, n):
+    return [x for x in arr[::-1] if x % 2 == 0][0:n][::-1]
             
+
+def tourney(inp):
+    rounds = [inp]
+    result = []
+    last_contestant = 0
+    while len(inp) != 1:
+        if len(inp) % 2 != 0:
+            ## is odd
+            last_contestant = inp[-1]
+            inp = inp[:-1]
+        for i in range(0, len(inp) - 1, 2):
+            contestant_1 = inp[i]
+            contestant_2 = inp[i + 1]
+            result.append(contestant_1 if contestant_1 > contestant_2 else contestant_2)
+        inp = [last_contestant] + result if last_contestant != 0 else result
+        last_contestant = 0
+        rounds.append(inp)
+        result = []
+    return rounds
+
         
 
 
 
 def main():
-    print(is_triangle(2, 2, 2))
+    print(tourney([9, 5, 4, 7, 6, 3, 8]))
 
 if __name__ == "__main__":
     main()

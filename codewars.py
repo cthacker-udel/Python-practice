@@ -1184,6 +1184,62 @@ def cakes(recipe, available):
 def is_triangle(a, b, c):
     return (a > 0 and b > 0 and c > 0) and (round(((a*a) + (b*b))**.5) == c or round(((a*a) + (c*c))**.5) == b or round(((b*b) + (c*c))**.5) == a or ((a + b) > c and (b + c) > a and (c + a) > b))
 
+def generate_pairs(m, n):
+    pairs = []
+    for i in range(m, n + 1):
+        for j in range(i, n + 1):
+            pairs.append((i, j))
+    return pairs
+
+def find_ball(scales):
+    left_index = [0, 1, 2, 3]
+    right_index = [4, 5, 6, 7]
+    for i in range(3):
+        w = scales.get_weight(left_index, right_index)
+        if w == 1 and len(left_index) == 4:
+            left_index = [4, 5]
+            right_index = [6, 7]
+        elif w == -1 and len(left_index) == 4:
+            left_index = [0, 1]
+            right_index = [2, 3]
+
+        elif w == 1 and len(left_index) == 2 and right_index[0] == 2:
+            left_index = [2]
+            right_index = [3]
+        elif w == -1 and len(left_index) == 2 and right_index[0] == 2:
+            left_index = [0]
+            right_index = [1]
+
+        elif w == 1 and len(left_index) == 2 and right_index[0] == 6:
+            left_index = [6]
+            right_index = [7]
+        elif w == -1 and len(left_index) == 2 and right_index[0] == 6:
+            left_index = [4]
+            right_index = [5]
+
+        elif w == 1 and len(left_index) == 1 and right_index[0] == 7:
+            return 7
+        elif w == -1 and len(left_index) == 1 and right_index[0] == 7:
+            return 6
+
+        elif w == 1 and len(left_index) == 1 and right_index[0] == 5:
+            return 5
+        elif w == -1 and len(left_index) == 1 and right_index[0] == 5:
+            return 4
+
+        elif w == 1 and len(left_index) == 1 and right_index[0] == 1:
+            return 1
+        elif w == -1 and len(left_index) == 1 and right_index[0] == 1:
+            return 0
+        
+        elif w == 1 and len(left_index) == 1 and right_index[0] == 3:
+            return 3
+        elif w == -1 and len(left_index) == 1 and right_index[0] == 3:
+            return 2
+            
+        
+
+
 
 def main():
     print(is_triangle(2, 2, 2))

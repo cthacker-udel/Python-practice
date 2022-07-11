@@ -1261,12 +1261,36 @@ def tourney(inp):
         result = []
     return rounds
 
-        
+def vowel_one(astr):
+    return ''.join(['1' if x in 'aeiouAEIOU' else '0' for x in astr])
+
+def increment_month(month, inc):
+    if inc:
+        if len(month) > 1:
+            return '{}{}'.format(int(month[0]) + 5, month[1])
+        else:
+            return '{}'.format(int(month) + 5)
+    else:
+        return month
+
+def driver(data):
+    months = { "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12" }
+    [fname, mname, lname, dob, gender] = data
+    _first = lname[0:5].upper() if len(lname) > 5 else (lname + ('9' * (5 - len(lname)))).upper()
+    _second = dob.split('-')[2][2]
+    _third = increment_month(months[[x for x in months if x in dob.split('-')[1]][0]], gender == 'F')
+    _fourth = dob.split('-')[0]
+    _fifth = dob.split('-')[2][3]
+    _sixth = '{}9'.format(fname[0]) if mname == '' else '{}{}'.format(fname[0], mname[0])
+    _seventh = '9'
+    _eighth = 'AA'
+    return '{}{}{}{}{}{}{}{}'.format(_first, _second, _third, _fourth, _fifth, _sixth, _seventh, _eighth)
 
 
 
 def main():
-    print(tourney([9, 5, 4, 7, 6, 3, 8]))
+    data = ["Andrew", "Robert", "Lee", "02-September-1981", "M"]
+    print(driver(data))
 
 if __name__ == "__main__":
     main()
